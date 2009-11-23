@@ -1,5 +1,5 @@
 require 'rubygems'
 require 'base64'
 require 'gbarcode'
-require 'rmagick'
+require 'RMagick'
 require 'barcoder'
