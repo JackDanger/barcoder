@@ -74,6 +74,6 @@ Gbarcode as of now allows us to generate barcodes in following formats:
         BARCODE_ANY
         BARCODE_NO_CHECKSUM
 
-for more information on Gbarcode visit http://gbarcode.rubyforge.org/rdoc/index.html
+for more information on Gbarcode visit <http://gbarcode.rubyforge.org/rdoc/index.html><br/>
 Many many thanks to Anuj Luthra for solving the initial hard work!
 
