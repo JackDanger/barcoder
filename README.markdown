@@ -3,15 +3,15 @@ Barcoder, v 1.0
 
 ### Author : Derek Perez
 
-inspired (heavily) by the work of Author: Anuj Luthra. He originally wrote the library barcode_generator (http://github.com/anujluthra/barcode-generator/), that this library is based on.
+inspired (heavily) by the work of Author: Anuj Luthra. He originally wrote the library barcode_generator (<http://github.com/anujluthra/barcode-generator/>), that this library is based on.
  
-This library is designed to support streaming barcode information, from GBarcode, straight to the web browser using data urls (http://en.wikipedia.org/wiki/Data_URI_scheme). This is ideal for no-write filesystem scenarios. It also supports persisting the barcodes to disk, but this is an optional function. By default, data urls are used. Barcode generator makes generating/displaying barcodes for certain alphanumeric ids a piece of cake. This way we can generate any barcode type which Gbarcode -> Gnome Barcode project supports.
+This library is designed to support streaming barcode information, from GBarcode, straight to the web browser using data urls (<http://en.wikipedia.org/wiki/Data_URI_scheme>). This is ideal for no-write filesystem scenarios. It also supports persisting the barcodes to disk, but this is an optional function. By default, data urls are used. Barcode generator makes generating/displaying barcodes for certain alphanumeric ids a piece of cake. This way we can generate any barcode type which Gbarcode -> Gnome Barcode project supports.
 
 ### FAQ
 
 #### Why did you create this plugin?
 
-barcode_generator is an awesome plugin, however, it does not interact very well with non-write filesystem style servers, ie: Heroku, or EC2. In the cloud, you can't be writing files to the filesystem (usually) directly, so I thought it was necessary to write a plugin that could use data urls (http://en.wikipedia.org/wiki/Data_URI_scheme) to stream the barcode to the browser, __with no filesystem writes whatsoever.__
+barcode_generator is an awesome plugin, however, it does not interact very well with non-write filesystem style servers, ie: Heroku, or EC2. In the cloud, you can't be writing files to the filesystem (usually) directly, so I thought it was necessary to write a plugin that could use data urls (<http://en.wikipedia.org/wiki/Data_URI_scheme>) to stream the barcode to the browser, __with no filesystem writes whatsoever.__
 
 #### Why didn't you just fork his plugin?
 
