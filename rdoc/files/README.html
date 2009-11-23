@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Mon Nov 23 00:20:30 -0800 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Barcoder, v 1.0
+</p>
+<h6>=========</h6>
+<p>
+### Author : Derek Perez
+</p>
+<p>
+inspired (heavily) by the work of Author: Anuj Luthra. He originally wrote
+the library barcode_generator (<a
+href="http://github.com/anujluthra/barcode-generator">github.com/anujluthra/barcode-generator</a>/),
+that this library is based on.
+</p>
+<p>
+This library is designed to support streaming barcode information, from
+GBarcode, straight to the web browser using data urls (<a
+href="http://en.wikipedia.org/wiki/Data_URI_scheme">en.wikipedia.org/wiki/Data_URI_scheme</a>).
+This is ideal for no-write filesystem scenarios. It also supports
+persisting the barcodes to disk, but this is an optional function. By
+default, data urls are used. Barcode generator makes generating/displaying
+barcodes for certain alphanumeric ids a piece of cake. This way we can
+generate any barcode type which Gbarcode -&gt; Gnome Barcode project
+supports.
+</p>
+<p>
+### FAQ
+</p>
+<p>
+#### Why did you create this plugin?
+</p>
+<p>
+barcode_generator is an awesome plugin, however, it does not interact very
+well with non-write filesystem style servers, ie: Heroku, or EC2. In the
+cloud, you can&#8216;t be writing files to the filesystem (usually)
+directly, so I thought it was necessary to write a plugin that could use
+data urls (<a
+href="http://en.wikipedia.org/wiki/Data_URI_scheme">en.wikipedia.org/wiki/Data_URI_scheme</a>)
+to stream the barcode to the browser, __with no filesystem writes
+whatsoever.__
+</p>
+<p>
+#### Why didn&#8216;t you just fork his plugin?
+</p>
+<p>
+Anuj appeared to not want to rely directly on the RMagick gem itself.
+Instead, he was calling imagemagick&#8216;s configure command via
+Kernel#system. There is nothing wrong with this, but I did not want to add
+back this dependency if he didn&#8216;t need/want it. Also, I substantially
+re-wrote how the plugin generates the barcode with gbarcode.
+</p>
+<p>
+#### Is your API compatible with barcode_generator?
+</p>
+<p>
+Yes, it should work identically.
+</p>
+<p>
+### USAGE: its as simple as saying: `&lt;%= to_barcode &#8216;FJJ4JD&#8217;
+%&gt; `
+</p>
+<p>
+This will generate a barcode for FJJ4JD in BARCODE_39 format with default
+width and height and include it in the view.
+</p>
+<p>
+### Options Options Options: To customize your barcodes, you can optionally
+pass following information in your views
+</p>
+<pre>
+ + encoding_format (Gbarcode constants for eg. Gbarcode::BARCODE_128 etc..)
+ + width
+ + height
+ + scaling_factor
+ + xoff
+ + yoff
+ + margin
+ + no_ascii (accepts boolean true or false, prevents the ascii string from printing at the bottom of the barcode)
+ + output_type (accepts :disk or :stream. :disk will print the image to disk, and serve it regularly.)
+</pre>
+<p>
+in this case your view will look like:
+</p>
+<pre>
+  &lt;%= to_barcode 'ANUJ', :height =&gt; 100,
+                      :width  =&gt; 400,
+                      :margin =&gt; 100,
+                      :xoff   =&gt; 20,
+                      :yoff   =&gt; 40
+  %&gt;
+</pre>
+<p>
+### Installation: First install these requirements:
+</p>
+<pre>
+ 1. gem for gbarcode
+ 2. install native ImageMagick library (and RMagick)
+</pre>
+<p>
+Next, install Barcoder:
+</p>
+<p>
+`install from git : git://github.com/perezd/barcoder.git`
+</p>
+<p>
+### Supported Barcode Formats: Gbarcode as of now allows us to generate
+barcodes in following formats:
+</p>
+<pre>
+        BARCODE_EAN
+        BARCODE_UPC
+        BARCODE_ISBN
+        BARCODE_128B
+        BARCODE_128C
+        BARCODE_128
+        BARCODE_128RAW
+        BARCODE_39
+        BARCODE_I25
+        BARCODE_CBR
+        BARCODE_MSI
+        BARCODE_PLS
+        BARCODE_93
+        BARCODE_ANY
+        BARCODE_NO_CHECKSUM
+</pre>
+<p>
+for more information on Gbarcode visit <a
+href="http://gbarcode.rubyforge.org/rdoc/index.html">gbarcode.rubyforge.org/rdoc/index.html</a>
+Many many thanks to Anuj Luthra for solving the initial hard work!
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
