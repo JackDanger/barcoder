@@ -43,13 +43,12 @@ To customize your barcodes, you can optionally pass following information in you
  
 in this case your view will look like:
 
-
-  <%= to_barcode 'ANUJ', :height => 100, 
+    <%= to_barcode 'ANUJ', :height => 100, 
                       :width  => 400,
                       :margin => 100,
                       :xoff   => 20,
-		      :yoff   => 40
-  %> 
+		                  :yoff   => 40
+		%> 
 
 
 ### Installation:
