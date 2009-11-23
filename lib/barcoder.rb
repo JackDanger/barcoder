@@ -81,7 +81,7 @@ module ActionView
     # this method tricks GBarcode into printing the contents of the EPS into
     # a file pipe, allowing us to get at the binary data, without touching the disk.
     def get_bytes_from_barcode(barcode, print_options)
-      read, write = File.pipe
+      read, write = IO.pipe
       Gbarcode.barcode_print(barcode, write, print_options)
       write.close
       buffer = read.readlines.join("\n")
