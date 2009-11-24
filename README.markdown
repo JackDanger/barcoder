@@ -15,7 +15,7 @@ barcode_generator is an awesome plugin, however, it does not interact very well 
 
 #### Why didn't you just fork his plugin?
 
-Anuj appeared to not want to rely directly on the RMagick gem itself. Instead, he was calling imagemagick's configure command via Kernel#system. There is nothing wrong with this, but I did not want to add back this dependency if he didn't need/want it. Also, I substantially re-wrote how the plugin generates the barcode with gbarcode.
+I substantially re-wrote how the plugin displays barcodes, and I didn't want to have that break any pre-existing uses he was implementing it with.
 
 #### Is your API compatible with barcode_generator?
 
@@ -50,7 +50,7 @@ in this case your view will look like:
 First install these requirements:
 
  1. gem for gbarcode
- 2. install native ImageMagick library (and RMagick)
+ 2. install native ImageMagick library (RMagick not necessary)
 
 Next, install Barcoder:
 

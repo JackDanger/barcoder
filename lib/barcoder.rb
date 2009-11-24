@@ -43,13 +43,11 @@ module ActionView
       end
       
       # this is where the magic happens.
-      stream = get_bytes_from_barcode(bc, print_options)
-      data = Magick::Image::read_inline(Base64.encode64(stream))[0]
-      data.format = output_format
+      data = `echo "#{get_bytes_from_barcode(bc, print_options)}" | convert eps: #{output_format}:`
       
       # simple output strategy, define :output_type => :disk in the #to_barcode call if you want
       # it to write out to the disk for you, otherwise it will be a data url stream.
-      output_type == :disk ? barcode_to_disk(data, bc, output_format) : barcode_to_stream(data)
+      output_type == :disk ? barcode_to_disk(data, bc, output_format) : barcode_to_stream(data, output_format)
     end
     
     # support for the original barcode-generator plugin syntax.
@@ -65,7 +63,7 @@ module ActionView
       filename = "#{barcode.ascii.gsub(" ", "-")}.#{output_format}"
       Dir.mkdir(BARCODE_STORAGE_PATH) unless File.directory?(BARCODE_STORAGE_PATH)
       File.open("#{BARCODE_STORAGE_PATH}/#{filename}", 'w') do |f|
-        f.write(data.to_blob)
+        f.write(data)
       end
       image_tag("barcodes/#{filename}")
     end
@@ -73,8 +71,8 @@ module ActionView
     # stream the barcode to the client as a data url. often times, the barcode
     # filesize is so minute, that this is absolutely acceptable. NOTE: I intentionally
     # draw my own img tag for this, image_tag doesn't really like this.
-    def barcode_to_stream(data)
-      src = "data:image/#{data.format};base64,#{Base64.encode64(data.to_blob)}"
+    def barcode_to_stream(data, format)
+      src = "data:image/#{format};base64,#{Base64.encode64(data)}"
       %Q{<img src="#{src}" />}
     end
     
