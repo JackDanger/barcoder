@@ -47,7 +47,7 @@ module ActionView
       
       # simple output strategy, define :output_type => :disk in the #to_barcode call if you want
       # it to write out to the disk for you, otherwise it will be a data url stream.
-      output_type == :disk ? barcode_to_disk(data, bc, output_format) : barcode_to_stream(data, output_format)
+      output_type == :disk ? barcode_to_disk(data, bc, output_format) : barcode_to_stream(data, output_format, str)
     end
     
     # support for the original barcode-generator plugin syntax.
@@ -71,9 +71,9 @@ module ActionView
     # stream the barcode to the client as a data url. often times, the barcode
     # filesize is so minute, that this is absolutely acceptable. NOTE: I intentionally
     # draw my own img tag for this, image_tag doesn't really like this.
-    def barcode_to_stream(data, format)
+    def barcode_to_stream(data, format, str)
       src = "data:image/#{format};base64,#{Base64.encode64(data)}"
-      %Q{<img src="#{src}" />}
+      %Q{<img src="#{src}" alt="#{str}" />}
     end
     
     # this method tricks GBarcode into printing the contents of the EPS into
