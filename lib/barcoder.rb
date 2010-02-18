@@ -65,7 +65,7 @@ module ActionView
       File.open("#{BARCODE_STORAGE_PATH}/#{filename}", 'w') do |f|
         f.write(data)
       end
-      image_tag("barcodes/#{filename}")
+      image_tag("barcodes/#{filename}", :id => "barcode", :class => "barcode")
     end
     
     # stream the barcode to the client as a data url. often times, the barcode
@@ -73,7 +73,7 @@ module ActionView
     # draw my own img tag for this, image_tag doesn't really like this.
     def barcode_to_stream(data, format, str)
       src = "data:image/#{format};base64,#{Base64.encode64(data)}"
-      %Q{<img src="#{src}" alt="#{str}" />}
+      %Q{<img src="#{src}" alt="#{str}" id="barcode" class="barcode" />}
     end
     
     # this method tricks GBarcode into printing the contents of the EPS into
